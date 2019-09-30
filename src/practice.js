@@ -6,4 +6,8 @@ const knexInstance = knex( {
   connection: process.env.DB_URL
 });
 
+knexInstance('amazong_products')
+  .select('*')
+  .then( result => console.log(result));
+
 console.log('knex and driver installed correctly');
