@@ -47,3 +47,14 @@ function itemsAddedAfterDate(daysAgo) {
 
 /* itemsAddedAfterDate(2); */
 
+function totalPerCategory() {
+  knexInstance
+    .select('category')
+    .sum('price as total')
+    .from('shopping_list')
+    .groupBy('category')
+    .then( res => console.log(res))
+    .finally( () => knexInstance.destroy());
+}
+
+/* totalPerCategory(); */
