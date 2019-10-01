@@ -30,5 +30,20 @@ function shoppingListPagination(pageNumber) {
     .finally( () => knexInstance.destroy());
 }
 
-shoppingListPagination(2);
+/* shoppingListPagination(2); */
+
+function itemsAddedAfterDate(daysAgo) {
+  knexInstance
+    .select('*')
+    .from('shopping_list')
+    .where(
+      'date_added',
+      '>',
+      knexInstance.raw(`now() - '?? days'::INTERVAL`, daysAgo)
+    )
+    .then( res => console.log(res))
+    .finally( () => knexInstance.destroy());
+}
+
+/* itemsAddedAfterDate(2); */
 
