@@ -1,6 +1,10 @@
+const ArticlesService = require('../src/articles-service');
+
 describe('Articles service object', () => {
-  it('should run the tests', () => {
-    expect(true).to.eql(false);
+  describe('getAllArticles()', () => {
+    it('resolves all articles from "blogful_articles" table', () => {
+      //test that ArticleService.getAllArticles gets data from table
+    });
   });
 });
 
