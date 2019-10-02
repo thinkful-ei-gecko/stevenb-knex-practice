@@ -144,6 +144,18 @@ describe('Shopping-List service object', () => {
   });
 
   describe('When item is deleted, the item is removed from shopping_list', () => {
+    before( () => db.into('shopping_list').insert(testArticles));
 
+    it('deleteArticle() deletes the specified item from the database', () => {
+      const deleteMeId = 4;
+
+      return shoppingListService.deleteArticle(db, deleteMeId)
+        .then( () => shoppingListService.getAllArticles(db) )
+        .then( allItems => {
+          expect(allItems.length).to.equal(3);
+          const expectedDb = allItems.filter( item => item.id !== deleteMeId);
+          expect(allItems).to.eql(expectedDb);
+        });
+    });
   });
 });

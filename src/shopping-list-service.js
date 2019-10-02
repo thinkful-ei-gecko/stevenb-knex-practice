@@ -17,6 +17,10 @@ const shoppingListService = {
 
   updateArticle(db, id, newArticleFields) {
     return db.from('shopping_list').where({ id }).update(newArticleFields);
+  },
+
+  deleteArticle(db, id) {
+    return db.from('shopping_list').where({ id }).delete();
   }
 };
 
