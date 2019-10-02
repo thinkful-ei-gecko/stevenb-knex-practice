@@ -104,6 +104,7 @@ describe('Shopping-List service object', () => {
 
       return shoppingListService.getById(db, secondId)
         .then( actual => {
+          expect(actual).to.be.an('object');
           expect(actual).to.eql({
             id: secondId,
             name: secondTestItem.name,
@@ -116,8 +117,30 @@ describe('Shopping-List service object', () => {
     });
   });
 
-  describe('When update is made to shopping_list, the previous item is updated', () => {
+  describe('When update is made to shopping_list, the item is updated', () => {
+    before( () => db.into('shopping_list').insert(testArticles) );
 
+    it('updateArticle() updates an article in shopping_list', () => {
+      const articleIdToUpdate = 1;
+      const updateArticleData = { 
+        name: 'updated',
+        checked: true,
+        price: '10.13',
+        category: 'Breakfast'
+      };
+
+      return shoppingListService.updateArticle(db, articleIdToUpdate, updateArticleData)
+        .then( () => shoppingListService.getById(db, articleIdToUpdate ))
+        .then( item => {
+          expect(item).to.be.an('object');
+          expect(item.name).to.equal('updated');
+          expect(item).to.eql({
+            ...updateArticleData,
+            id: articleIdToUpdate,
+            date_added: testArticles[articleIdToUpdate - 1].date_added
+          });
+        });
+    });
   });
 
   describe('When item is deleted, the item is removed from shopping_list', () => {
