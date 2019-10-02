@@ -93,6 +93,29 @@ describe('Shopping-List service object', () => {
     });
   });
 
+  describe('When shopping_list has data', () => {
+    beforeEach( () => {
+      return db.into('shopping_list').insert(testArticles);
+    });
+
+    it('getById() resolves an item by id from shopping_list', () => {
+      const secondId = 2;
+      const secondTestItem = testArticles[secondId - 1];
+
+      return shoppingListService.getById(db, secondId)
+        .then( actual => {
+          expect(actual).to.eql({
+            id: secondId,
+            name: secondTestItem.name,
+            price: secondTestItem.price,
+            date_added: secondTestItem.date_added,
+            checked: secondTestItem.checked,
+            category: secondTestItem.category
+          });
+        });
+    });
+  });
+
   describe('When update is made to shopping_list, the previous item is updated', () => {
 
   });
