@@ -52,13 +52,13 @@ describe('Articles service object', () => {
         });
     });
   });
-});
-
-context('Given blogful_articles has no data', () => {
-  it('getAllArticles() resolves an empty array', () => {
-    return ArticlesService.getAllArticles(db)
-      .then( actual => {
-        expect(actual).to.eql([]);
-      });
+  
+  context('Given blogful_articles has no data', () => {
+    it('getAllArticles() resolves an empty array', () => {
+      return ArticlesService.getAllArticles(db)
+        .then( actual => {
+          expect(actual).to.eql([]);
+        });
+    });
   });
 });
