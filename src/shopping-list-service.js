@@ -4,7 +4,11 @@ const shoppingListService = {
   },
 
   insertArticle(db, newArticle) {
-    return db.from('shopping_list').insert(newArticle);
+    return db
+      .insert(newArticle)
+      .into('shopping_list')
+      .returning('*')
+      .then( rows => rows[0] );
   }
 };
 

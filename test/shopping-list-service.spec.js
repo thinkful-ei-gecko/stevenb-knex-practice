@@ -74,7 +74,23 @@ describe('Shopping-List service object', () => {
   });
 
   describe('When addition is made to shopping_list, the item is added', () => {
+    let newItem = {
+      id: 1,
+      name: 'newItem',
+      price: '12.22',
+      date_added: new Date('2029-01-22T16:28:32.615Z'),
+      checked: false,
+      category: 'Snack'
+    };
 
+    it('insertArticle() inserts a new item to shopping_list', () => {
+      return shoppingListService.insertArticle(db, newItem)
+        .then( actual => {
+          expect(actual).to.eql(newItem);
+          expect(actual.id).to.equal(1);
+          expect(actual.name).to.equal('newItem');
+        });
+    });
   });
 
   describe('When update is made to shopping_list, the previous item is updated', () => {
