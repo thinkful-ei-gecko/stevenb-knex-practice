@@ -73,11 +73,15 @@ describe('Shopping-List service object', () => {
     });
   });
 
-  describe('When update is made to shopping_list, new object is added', () => {
+  describe('When addition is made to shopping_list, the item is added', () => {
+
+  });
+
+  describe('When update is made to shopping_list, the previous item is updated', () => {
 
   });
 
   describe('When item is deleted, the item is removed from shopping_list', () => {
-    
-  })
+
+  });
 });
